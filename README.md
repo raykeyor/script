@@ -1,2 +1,2 @@
 # script
-this is the script for remote transfer file
+this is the script for dialy
