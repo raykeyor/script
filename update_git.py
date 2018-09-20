@@ -111,7 +111,7 @@ class Remote:
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())    #设置自动添加和保存目标ssh服务器的ssh密钥
         client.connect(self.hostname, self.port, username=self.username, password=self.password)  #连接
         # stdin,stdout,stderr=client.exec_command(self.command)
-        stdin,stdout,stderr=client.exec_command("python3.6 /root/nginx/dist.py")
+        stdin,stdout,stderr=client.exec_command(self.command)
         for i in stdout.readlines():
             print(i.rstrip('\n'))
         for i in stderr.readlines():
@@ -120,13 +120,8 @@ class Remote:
 
 
 if __name__ == '__main__':
-    # origin_path=r"E:\github\CloudOptimus"
-    # target_path=r"E:\CloudOptimus_backup\CloudOptimus"
-    # update(origin_path)
-    # time.sleep(1)
-    # backup(origin_path,target_path)
-    # time.sleep(1)
-    # repalce_file(target_path)
+    origin_path=r"E:\github\CloudOptimus"
+    target_path=r"E:\CloudOptimus_backup\CloudOptimus"
     hostname='192.168.118.29'  
     username='root'  
     password='payegis@admin'  
@@ -134,11 +129,12 @@ if __name__ == '__main__':
     local_dir=r'E:\CloudOptimus_backup\CloudOptimus\agent-api' # 本地需要上传的文件所处的目录
     remote_dir='/root/nginx/agent-api_1.0/agent-api_1.0/'  #linux下目录
     path=''
-    command='cd /opt'
-    host_list=['192.168.118.21','192.168.118.22','192.168.118.28','192.168.118.16',
-    '192.168.118.17','192.168.118.18','192.168.118.19']
-    for host in host_list:
-        pass
+    command="python3.6 /root/nginx/dist.py"
+    update(origin_path)
+    time.sleep(1)
+    backup(origin_path,target_path)
+    time.sleep(1)
+    repalce_file(target_path)
     remote=Remote(hostname,username,password,port,local_dir,remote_dir,path,command)
-    # remote.upload()
+    remote.upload()
     remote.execute()
