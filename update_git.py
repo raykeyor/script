@@ -122,9 +122,9 @@ class Remote:
 if __name__ == '__main__':
     origin_path=r"E:\github\CloudOptimus"
     target_path=r"E:\CloudOptimus_backup\CloudOptimus"
-    hostname='192.168.118.29'  
-    username='root'  
-    password='payegis@admin'  
+    hostname=***  
+    username=***  
+    password=***  
     port=22  
     local_dir=r'E:\CloudOptimus_backup\CloudOptimus\agent-api' # 本地需要上传的文件所处的目录
     remote_dir='/root/nginx/agent-api_1.0/agent-api_1.0/'  #linux下目录
