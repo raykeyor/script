@@ -1,6 +1,6 @@
 # !usr/bin/env python3.6  
 # -*- coding: utf-8 -*-
-# Author:lei.tang@tongfudun.com
+# Author:lei.tang
 
 import datetime
 import logging
