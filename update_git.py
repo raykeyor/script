@@ -137,7 +137,7 @@ class Remote_Put:
 if __name__ == '__main__':
     origin_path = r"E:\github"
     target_path = r"E:\CloudOptimus_backup\CloudOptimus"
-    # hostname='192.168.118.29'
+    # hostname=''
     # username='root'
     # password=''                                                                                                                                                                                              io'
     port = 22
