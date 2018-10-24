@@ -159,7 +159,7 @@ def run(arg):
 
 
     elif arg == 1:
-        # query the latest image for  buliding
+        # query the latest image for  building
         docker_img = get_docker_img(command_image)
         docker_id = get_docker_id(docker_name, tag, docker_img, 2)
 
@@ -255,7 +255,7 @@ if __name__ == '__main__':
         if args == 1:
             docker_name = docker_name
         elif args == 2:
-            docker_name = 'registry.cn-shanghai.aliyuncs.com/anquanjiance/{}'.format(name)
+            docker_name = 'registry.cn-shanghai.aliyuncs.com/***/{}'.format(name)
         else:
             print("The docker name is wrong ,please input the correct docker name !!!!")
 
