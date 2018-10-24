@@ -22,7 +22,7 @@ def update(origin_path):
         data = Git().execute("git pull")
     except Exception as e:
         os.chdir(origin_path)
-        data = Git().execute("git clone http://git.tongfudun.com/jie.shen/CloudOptimus.git")
+        data = Git().execute("git clone http://git.******.git")
     finally:
         print(data)
 
@@ -135,13 +135,13 @@ class Remote_Put:
 
 
 if __name__ == '__main__':
-    origin_path = r"E:\github"
-    target_path = r"E:\CloudOptimus_backup\CloudOptimus"
+    origin_path = r"*******"
+    target_path = r"******"
     # hostname=''
     # username='root'
     # password=''                                                                                                                                                                                              io'
     port = 22
-    local_dir = r'E:\CloudOptimus_backup\CloudOptimus\agent-api'  # 本地需要上传的文件所处的目录
+    local_dir = r'\********\agent-api'  # 本地需要上传的文件所处的目录
     remote_dir = '/root/nginx/agent-api_1.0/agent-api_1.0/'  # linux下目录
     path = ''
     command = "python3.6 /root/nginx/dist.py"
