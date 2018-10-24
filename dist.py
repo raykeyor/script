@@ -132,7 +132,7 @@ def del_tag_None(docker_img):
 # distribute the docker to aliyun
 def dist_aliyun(path, docker_name, tag, docker_file):
     # log in the docker for aliyun
-    command_login = "docker login --password=jEZyx87zyW5Ag2hz --username=anquan@1300900345751439 registry.cn-shanghai.aliyuncs.com"
+    command_login = "docker login --password=******* --username=******** registry.cn-shanghai.aliyuncs.com"
     os.system(command_login)
 
     # dist in the local
