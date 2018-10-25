@@ -250,7 +250,7 @@ if __name__ == '__main__':
         path = os.path.join(base_path, folder_name)
 
         # dist type
-        args = getConfig(base_path,config_name,'aliyuncs','id')
+        args = int(getConfig(base_path,config_name,'aliyuncs','id'))
         name = getConfig(base_path,config_name,'aliyuncs','name')
         if args == 1:
             docker_name = docker_name
