@@ -1,10 +1,10 @@
 # !usr/bin/env python3.6  
 # -*- coding: utf-8 -*-
 # Author:lei.tang
-import time
 import datetime
 import logging
 import shutil
+import time
 import os
 import paramiko
 import pysftp
@@ -15,21 +15,29 @@ logging.basicConfig(filename='upload.log', level=logging.INFO, filemode='a',
 
 
 def update(origin_path):
-
     try:
         global data
-        dir = os.chdir(os.path.join(origin_path, '****'))
+        dir = os.chdir(os.path.join(origin_path, '******'))
         data = Git().execute("git pull")
     except Exception as e:
         os.chdir(origin_path)
-        data = Git().execute("git clone http://******.git")
+        data = Git().execute("git clone http://*******.git")
     finally:
         print(data)
 
 
 def backup(origin_path, target_path):
-    shutil.rmtree(target_path)
-    shutil.copytree(origin_path, target_path, ignore=shutil.ignore_patterns('*.git*'))
+    if os.listdir(origin_path) and os.listdir(target_path):
+        try:
+            shutil.rmtree(target_path)
+        except Exception as e:
+            print(e)
+        try:
+            shutil.copytree(origin_path, target_path, ignore=shutil.ignore_patterns('*.git*'))
+        except Exception as e:
+            print(e)
+    else:
+        print("The data from input is not the directory .")
 
 
 def repalce_file(target_path):
@@ -50,19 +58,18 @@ def repalce_file(target_path):
 
 class Remote_Put:
 
-    def __init__(self, hostname, username, password, port, local_dir, remote_dir, path, command):
+    def __init__(self, hostname, username, password, port, local_dir, remote_dir, command):
         self.hostname = hostname
         self.username = username
         self.password = password
         self.port = port
         self.local_dir = local_dir
         self.remote_dir = remote_dir
+        self.command = command
         self.list_dir = []
         self.list_file = []
         self.list_unknown = []
         self.dir_list = []
-        self.path = path
-        self.command = command
 
     def treedir(self, dir):
         self.list_dir.append(dir)
@@ -135,21 +142,41 @@ class Remote_Put:
         client.close()
 
 
+class Config:
+    agent_api = {
+        'hostname': '********',
+        'username': 'root',
+        'password': 'Nginx@29',
+        'port' : 22,
+        'local_dir': r'E:******\agent-api',
+        'remote_dir': r'/root/nginx/agent-api_1.0/agent-api_1.0/',
+        'command': "cd /root/nginx/ && python3.6 arg.py 1 agent-api"
+    }
+
+    web_api = {
+        'hostname': '********',
+        'username': 'root',
+        'password': 'qaZ!bevKURTKiD2q',
+        'port': 22,
+        'local_dir': r'********\web-api',
+        'remote_dir': r'/home/lei.tang/myapp/web-api_1.0/web-api_1.0/',
+        'command': "cd /home/lei.tang/myapp/ && python3.6 arg.py 0 agent-api"
+    }
+
+
 if __name__ == '__main__':
     print(datetime.datetime.now())
     origin_path = r"E:\github"
-    target_path = r"E:\******"
-    hostname='192.168.118.29'
-    username='root'
-    password='Nginx@29'
-    port = 22
-    local_dir = r'E:\*********'  # 本地需要上传的文件所处的目录
-    remote_dir = '/root/nginx/agent-api_1.0/agent-api_1.0/'  # linux下目录
-    path = ''
-    command = "cd /root/nginx/ && python3.6 arg.py 1 agent-api"
+    target_path = r"E:\*****_backup"
     update(origin_path)
     time.sleep(1)
-    backup(origin_path,target_path)
-    remote=Remote_Put(hostname,username,password,port,local_dir,remote_dir,path,command)
+    backup(origin_path, target_path)
+    remote = Remote_Put(Config.agent_api['hostname'],
+                        Config.agent_api['username'],
+                        Config.agent_api['password'],
+                        Config.agent_api['port'],
+                        Config.agent_api['local_dir'],
+                        Config.agent_api['remote_dir'],
+                        Config.agent_api['command'])
     remote.upload()
     remote.execute()
