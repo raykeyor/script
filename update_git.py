@@ -1,7 +1,7 @@
 # !usr/bin/env python3.6  
 # -*- coding: utf-8 -*-
 # Author:lei.tang
-
+import time
 import datetime
 import logging
 import shutil
@@ -18,11 +18,11 @@ def update(origin_path):
 
     try:
         global data
-        dir = os.chdir(os.path.join(origin_path, 'CloudOptimus'))
+        dir = os.chdir(os.path.join(origin_path, '****'))
         data = Git().execute("git pull")
     except Exception as e:
         os.chdir(origin_path)
-        data = Git().execute("git clone http://git.******.git")
+        data = Git().execute("git clone http://******.git")
     finally:
         print(data)
 
@@ -131,25 +131,25 @@ class Remote_Put:
             print(i.rstrip('\n'))
         for i in stderr.readlines():
             print(i.rstrip("\n"))
+
         client.close()
 
 
 if __name__ == '__main__':
-    origin_path = r"*******"
-    target_path = r"******"
-    # hostname=''
-    # username='root'
-    # password=''                                                                                                                                                                                              io'
+    print(datetime.datetime.now())
+    origin_path = r"E:\github"
+    target_path = r"E:\******"
+    hostname='192.168.118.29'
+    username='root'
+    password='Nginx@29'
     port = 22
-    local_dir = r'\********\agent-api'  # 本地需要上传的文件所处的目录
+    local_dir = r'E:\*********'  # 本地需要上传的文件所处的目录
     remote_dir = '/root/nginx/agent-api_1.0/agent-api_1.0/'  # linux下目录
     path = ''
-    command = "python3.6 /root/nginx/dist.py"
+    command = "cd /root/nginx/ && python3.6 arg.py 1 agent-api"
     update(origin_path)
-    # time.sleep(1)
-    # backup(origin_path,target_path)
-    # time.sleep(1)
-    # repalce_file(target_path)
-    # remote=Remote(hostname,username,password,port,local_dir,remote_dir,path,command)
-    # remote.upload()
-    # remote.execute()
+    time.sleep(1)
+    backup(origin_path,target_path)
+    remote=Remote_Put(hostname,username,password,port,local_dir,remote_dir,path,command)
+    remote.upload()
+    remote.execute()
